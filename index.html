@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="btn-Increse">Click</button>
+    <p >Press count <span class="press-count">0</span></p>
+    <p  >Trigerred Count <span class="trig-count">0</span></p>
+    <text>testing</text>
+    <button id="myElement">Click ME</button>
+  </body>
+  <script src="../js/script.js">
+  
+    // On Page Load Event
+    addEventListener("customEventByMe", function () {
+      alert("testing Custom Events");
+    });
+    const Events = new Event("customEventByMe", { bubbles: true });
+    document.dispatchEvent(Events);
+
+    // on Button Click Event
+    const myElement = document.getElementById("myElement");
+    myElement.addEventListener("click", function () {
+      const myEvent = new Event("customEventByMe", {
+        detail: { key: "value" },
+        bubbles: true,
+        cancelable: true,
+      });
+      myElement.dispatchEvent(myEvent);
+    });
+
+    addEventListener("customEventByMe", function (event) {
+      alert("testing Custom Events: " + JSON.stringify(event.detail));
+    });
+  </script>
+</html>
